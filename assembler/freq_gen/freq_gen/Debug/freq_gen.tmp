@@ -1,0 +1,32 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\repo\test_asm\freq_gen\freq_gen\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\repo\test_asm\freq_gen\freq_gen\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\repo\test_asm\freq_gen\freq_gen\Debug\freq_gen.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>freq_gen.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>freq_gen.map</FILE>
+  <FILE>freq_gen.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <start><FILE>C:\repo\test_asm\freq_gen\freq_gen\main.asm</FILE><LINE>23</LINE></start>
+  <freq2><FILE>C:\repo\test_asm\freq_gen\freq_gen\main.asm</FILE><LINE>30</LINE></freq2>
+  <on_off><FILE>C:\repo\test_asm\freq_gen\freq_gen\main.asm</FILE><LINE>41</LINE></on_off>
+  <delay><FILE>C:\repo\test_asm\freq_gen\freq_gen\main.asm</FILE><LINE>54</LINE></delay>
+  <c2><FILE>C:\repo\test_asm\freq_gen\freq_gen\main.asm</FILE><LINE>56</LINE></c2>
+  <c1><FILE>C:\repo\test_asm\freq_gen\freq_gen\main.asm</FILE><LINE>57</LINE></c1>
+ </LABELS>
+</ASSEMBLER_INFO>
