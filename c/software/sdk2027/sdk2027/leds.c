@@ -8,8 +8,11 @@
 #include <util/delay.h>
 
 void led_on_off(void){
-	PORTB |= (1 << PB5);
-	_delay_ms(1000);
-	PORTB &= ~(1 << PB5);
-	_delay_ms(1000);
+	PORTB ^= (1 << PB5);
+	_delay_ms(500);
+}
+
+void led_on_off_int0(void){
+	PORTB ^= (1 << PB5);
+	_delay_ms(100);
 }
