@@ -15,12 +15,13 @@ ISR(INT0_vect){
 }
 
 ISR(INT1_vect){
-	
+	for(int i=0; i < 10;i++){
+		led_on_off_int1();
+	}
 }
 
 void init_ext_int(void){
 	EICRA |=(1 << ISC01) | ~(1 << ISC00); //int0 activa en pulso de bajada
 	EICRA |=(1 << ISC11) | ~(1 << ISC10); //int1 activa en pulso de bajada
 	EIMSK |=(1 << INT0) | (1 << INT1);
-	sei();
 }

@@ -16,3 +16,8 @@ void led_on_off_int0(void){
 	PORTB ^= (1 << PB5);
 	_delay_ms(100);
 }
+
+void led_on_off_int1(void){
+	PORTB ^= (1 << PB5);
+	_delay_ms(1000);
+}

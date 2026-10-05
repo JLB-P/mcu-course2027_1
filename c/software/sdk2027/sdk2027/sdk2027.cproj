@@ -134,6 +134,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="a_comp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="a_comp.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ext_int.c">
       <SubType>compile</SubType>
     </Compile>

@@ -11,5 +11,5 @@
 
 void led_on_off(void);
 void led_on_off_int0(void);
-
+void led_on_off_int1(void);
 #endif /* LEDS_H_ */
