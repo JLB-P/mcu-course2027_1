@@ -9,6 +9,7 @@
 #include "leds.h"
 #include "ext_int.h"
 #include "a_comp.h"
+#include "lcd_4b.h"
 
 int main(void)
 {
@@ -16,6 +17,9 @@ int main(void)
     init_ports();
 	init_ext_int();
 	init_analog_comp();
+	lcd_init();
+	lcd_col_row(1,2);
+	lcd_write_string("todos reprobados");
 	sei();
 	while (1) 
     {

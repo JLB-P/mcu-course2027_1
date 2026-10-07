@@ -146,6 +146,12 @@
     <Compile Include="ext_int.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="lcd_4b.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="lcd_4b.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="leds.c">
       <SubType>compile</SubType>
     </Compile>
