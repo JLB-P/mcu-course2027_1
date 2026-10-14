@@ -2,7 +2,7 @@
  * a_comp.h
  *
  * Created: 9/28/2026 5:18:22 PM
- *  Author: josel
+ *  Author: jlbPacheco
  */ 
 
 

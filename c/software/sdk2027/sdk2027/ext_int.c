@@ -2,7 +2,7 @@
  * ext_int.c
  *
  * Created: 9/23/2026 4:29:41 PM
- *  Author: josel
+ *  Author: jlbPacheco
  */ 
 #include <avr/io.h>
 #include <avr/interrupt.h>

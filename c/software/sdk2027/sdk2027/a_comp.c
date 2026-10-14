@@ -2,8 +2,11 @@
  * a_comp.c
  *
  * Created: 9/28/2026 5:18:03 PM
- *  Author: josel
+ *  Author: jlbPacheco
  */ 
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
 ISR(ANALOG_COMP_vect){
 	
 }
