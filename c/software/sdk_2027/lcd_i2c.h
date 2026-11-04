@@ -9,7 +9,7 @@
 #ifndef LCD_I2C_H_
 #define LCD_I2C_H_
 
-#define PCF8574_ADDR	0x70	//I2C device address (Protesus sim.)
+#define PCF8574_ADDR	0x4E	//I2C device address (Protesus sim.)
 //#define PCF8574_ADDR	0x4E	//I2C device address
 // PCF8574 address=0x20, shift to left 0x40
 // PCF8574A address=0x38, shift to left 0x70

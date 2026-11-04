@@ -11,7 +11,7 @@
 
 void init_i2c(void){
 	TWSR = ((0 << TWPS1) & (0 << TWPS0)); //Prescaler = 1
-	TWBR = 0X48;	/*define Bit rate SCL_frec=CPU_frec/(16+2(TWBR)x(prescalerValue))
+	TWBR = 0X14;	/*define Bit rate SCL_frec=CPU_frec/(16+2(TWBR)x(prescalerValue))
 					* TWBR = Value of the TWI Bit Rate Register
 					* SCL_Frec=(16000000/(16+2(72)(1)))=100Khz	*/
 	TWCR = (1<<TWEN); //enable TWI

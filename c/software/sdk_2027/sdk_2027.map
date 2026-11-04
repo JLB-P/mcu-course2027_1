@@ -29,6 +29,12 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(dtoa
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(dtoa_prf.o) (__ftoa_engine)
 
+Allocating common symbols
+Common symbol       size              file
+
+usart_received_char
+                    0x1               usart.o
+
 Discarded input sections
 
  .data          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
@@ -36,6 +42,8 @@ Discarded input sections
  .text          0x00000000        0x0 a_comp.o
  .data          0x00000000        0x0 a_comp.o
  .bss           0x00000000        0x0 a_comp.o
+ .text.init_analog_comp
+                0x00000000        0x0 a_comp.o
  .text          0x00000000        0x0 adc.o
  .bss           0x00000000        0x0 adc.o
  .text.init_adc_withoutINT
@@ -47,6 +55,8 @@ Discarded input sections
  .text          0x00000000        0x0 ext_int.o
  .data          0x00000000        0x0 ext_int.o
  .bss           0x00000000        0x0 ext_int.o
+ .text.init_ext_int
+                0x00000000        0x0 ext_int.o
  .text          0x00000000        0x0 i2c.o
  .data          0x00000000        0x0 i2c.o
  .bss           0x00000000        0x0 i2c.o
@@ -67,6 +77,17 @@ Discarded input sections
  .text          0x00000000        0x0 ports.o
  .data          0x00000000        0x0 ports.o
  .bss           0x00000000        0x0 ports.o
+ .text          0x00000000        0x0 usart.o
+ .data          0x00000000        0x0 usart.o
+ .bss           0x00000000        0x0 usart.o
+ .text.usart_receive
+                0x00000000        0x0 usart.o
+ .text.usart_transmit
+                0x00000000        0x0 usart.o
+ .text.usart_transmit_string
+                0x00000000        0x0 usart.o
+ .text.init_usart
+                0x00000000        0x0 usart.o
  .text          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
  .data          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
  .bss           0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
@@ -133,6 +154,7 @@ LOAD lcd_i2c.o
 LOAD leds.o
 LOAD main.o
 LOAD ports.o
+LOAD usart.o
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
@@ -227,7 +249,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xe70
+.text           0x00000000      0xe80
  *(.vectors)
  .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vectors
@@ -304,7 +326,6 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x0000019c                __vector_14
                 0x0000019c                __vector_10
                 0x0000019c                __vector_16
-                0x0000019c                __vector_18
                 0x0000019c                __vector_20
  .text          0x000001a0       0xf2 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
                 0x000001a0                __floatunsisf
@@ -314,86 +335,83 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00000330                __pack_f
                 0x000004da                . = ALIGN (0x2)
  *(.text.*)
- .text.init_analog_comp
-                0x000004da        0xe a_comp.o
-                0x000004da                init_analog_comp
  .text.__vector_21
-                0x000004e8       0xe8 adc.o
-                0x000004e8                __vector_21
- .text.init_ext_int
-                0x000005d0       0x18 ext_int.o
-                0x000005d0                init_ext_int
+                0x000004da       0xe8 adc.o
+                0x000004da                __vector_21
  .text.__vector_2
-                0x000005e8       0x5c ext_int.o
-                0x000005e8                __vector_2
+                0x000005c2       0x5c ext_int.o
+                0x000005c2                __vector_2
  .text.__vector_1
-                0x00000644       0x5c ext_int.o
-                0x00000644                __vector_1
+                0x0000061e       0x5c ext_int.o
+                0x0000061e                __vector_1
  .text.init_i2c
-                0x000006a0       0x12 i2c.o
-                0x000006a0                init_i2c
- .text.start    0x000006b2       0x10 i2c.o
-                0x000006b2                start
+                0x0000067a       0x12 i2c.o
+                0x0000067a                init_i2c
+ .text.start    0x0000068c       0x10 i2c.o
+                0x0000068c                start
  .text.write_i2c
-                0x000006c2       0x14 i2c.o
-                0x000006c2                write_i2c
- .text.stop     0x000006d6       0x10 i2c.o
-                0x000006d6                stop
+                0x0000069c       0x14 i2c.o
+                0x0000069c                write_i2c
+ .text.stop     0x000006b0       0x10 i2c.o
+                0x000006b0                stop
  .text.lcd_i2c_data
-                0x000006e6       0x50 lcd_i2c.o
-                0x000006e6                lcd_i2c_data
+                0x000006c0       0x50 lcd_i2c.o
+                0x000006c0                lcd_i2c_data
  .text.lcd_i2c_write_string
-                0x00000736       0x18 lcd_i2c.o
-                0x00000736                lcd_i2c_write_string
+                0x00000710       0x18 lcd_i2c.o
+                0x00000710                lcd_i2c_write_string
  .text.lcd_i2c_cmd
-                0x0000074e       0x56 lcd_i2c.o
-                0x0000074e                lcd_i2c_cmd
+                0x00000728       0x56 lcd_i2c.o
+                0x00000728                lcd_i2c_cmd
  .text.lcd_i2c_clr
-                0x000007a4       0x10 lcd_i2c.o
-                0x000007a4                lcd_i2c_clr
+                0x0000077e       0x10 lcd_i2c.o
+                0x0000077e                lcd_i2c_clr
  .text.lcd_i2c_col_row
-                0x000007b4       0x14 lcd_i2c.o
-                0x000007b4                lcd_i2c_col_row
+                0x0000078e       0x14 lcd_i2c.o
+                0x0000078e                lcd_i2c_col_row
  .text.lcd_i2c_reset
-                0x000007c8       0x7e lcd_i2c.o
-                0x000007c8                lcd_i2c_reset
+                0x000007a2       0x7e lcd_i2c.o
+                0x000007a2                lcd_i2c_reset
  .text.lcd_i2c_init
-                0x00000846       0x22 lcd_i2c.o
-                0x00000846                lcd_i2c_init
+                0x00000820       0x22 lcd_i2c.o
+                0x00000820                lcd_i2c_init
  .text.led_on_off_int0
-                0x00000868       0x1c leds.o
-                0x00000868                led_on_off_int0
+                0x00000842       0x1c leds.o
+                0x00000842                led_on_off_int0
  .text.led_on_off_int1
-                0x00000884       0x1c leds.o
-                0x00000884                led_on_off_int1
+                0x0000085e       0x1c leds.o
+                0x0000085e                led_on_off_int1
  .text.__vector_23
-                0x000008a0       0x1e main.o
-                0x000008a0                __vector_23
- .text.main     0x000008be       0x52 main.o
-                0x000008be                main
+                0x0000087a       0x1e main.o
+                0x0000087a                __vector_23
+ .text.main     0x00000898       0x1e main.o
+                0x00000898                main
  .text.init_ports
-                0x00000910       0x10 ports.o
-                0x00000910                init_ports
- .text.libgcc   0x00000920       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
-                0x00000920                __udivmodhi4
- .text.libgcc   0x00000948       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x00000948                __prologue_saves__
- .text.libgcc   0x00000980       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x00000980                __epilogue_restores__
+                0x000008b6       0x1c ports.o
+                0x000008b6                init_ports
+ .text.__vector_18
+                0x000008d2       0x5e usart.o
+                0x000008d2                __vector_18
+ .text.libgcc   0x00000930       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x00000930                __udivmodhi4
+ .text.libgcc   0x00000958       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x00000958                __prologue_saves__
+ .text.libgcc   0x00000990       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00000990                __epilogue_restores__
  .text.avr-libc
-                0x000009b6       0x42 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(dtostrf.o)
-                0x000009b6                dtostrf
+                0x000009c6       0x42 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(dtostrf.o)
+                0x000009c6                dtostrf
  .text.avr-libc
-                0x000009f8      0x2c4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(dtoa_prf.o)
-                0x000009f8                dtoa_prf
+                0x00000a08      0x2c4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(dtoa_prf.o)
+                0x00000a08                dtoa_prf
  .text.avr-libc
-                0x00000cbc      0x1b0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
-                0x00000cbc                __ftoa_engine
-                0x00000e6c                . = ALIGN (0x2)
+                0x00000ccc      0x1b0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ftoa_engine.o)
+                0x00000ccc                __ftoa_engine
+                0x00000e7c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000e6c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00000e6c                exit
-                0x00000e6c                _exit
+ .fini9         0x00000e7c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00000e7c                exit
+                0x00000e7c                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -412,45 +430,48 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000e6c        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000e7c        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000e70                _etext = .
+                0x00000e80                _etext = .
 
-.data           0x00800100      0x11c load address 0x00000e70
+.data           0x00800100      0x112 load address 0x00000e80
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x2 adc.o
- .data          0x00800102       0x18 main.o
- .data          0x0080011a      0x100 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
-                0x0080011a                __clz_tab
+ .data          0x00800102        0xd main.o
+ .data          0x0080010f      0x100 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
+                0x0080010f                __clz_tab
  *(.data*)
- .data.column1  0x0080021a        0x2 lcd_i2c.o
-                0x0080021a                column1
+ .data.column1  0x0080020f        0x2 lcd_i2c.o
+                0x0080020f                column1
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x0080021c                . = ALIGN (0x2)
-                0x0080021c                _edata = .
-                0x0080021c                PROVIDE (__data_end, .)
+                0x00800212                . = ALIGN (0x2)
+ *fill*         0x00800211        0x1 00
+                0x00800212                _edata = .
+                0x00800212                PROVIDE (__data_end, .)
 
-.bss            0x0080021c        0x1
-                0x0080021c                PROVIDE (__bss_start, .)
+.bss            0x00800212        0x2
+                0x00800212                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.comp_event_flag
-                0x0080021c        0x1 main.o
-                0x0080021c                comp_event_flag
+                0x00800212        0x1 main.o
+                0x00800212                comp_event_flag
  *(COMMON)
-                0x0080021d                PROVIDE (__bss_end, .)
-                0x00000e70                __data_load_start = LOADADDR (.data)
-                0x00000f8c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800213        0x1 usart.o
+                0x00800213                usart_received_char
+                0x00800214                PROVIDE (__bss_end, .)
+                0x00000e80                __data_load_start = LOADADDR (.data)
+                0x00000f92                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080021d        0x0
-                0x0080021d                PROVIDE (__noinit_start, .)
+.noinit         0x00800214        0x0
+                0x00800214                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x0080021d                PROVIDE (__noinit_end, .)
-                0x0080021d                _end = .
-                0x0080021d                PROVIDE (__heap_start, .)
+                0x00800214                PROVIDE (__noinit_end, .)
+                0x00800214                _end = .
+                0x00800214                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -501,7 +522,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x1f8
+.debug_aranges  0x00000000      0x238
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x20 a_comp.o
@@ -520,14 +541,16 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_aranges
                 0x00000178       0x20 ports.o
  .debug_aranges
-                0x00000198       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+                0x00000198       0x40 usart.o
  .debug_aranges
-                0x000001b8       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+                0x000001d8       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
  .debug_aranges
-                0x000001d8       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+                0x000001f8       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .debug_aranges
+                0x00000218       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
 
 .debug_pubnames
-                0x00000000      0x2f1
+                0x00000000      0x379
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000       0x27 a_comp.o
@@ -546,15 +569,17 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_pubnames
                 0x0000024e       0x21 ports.o
  .debug_pubnames
-                0x0000026f       0x24 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+                0x0000026f       0x88 usart.o
  .debug_pubnames
-                0x00000293       0x1f c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+                0x000002f7       0x24 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
  .debug_pubnames
-                0x000002b2       0x1f c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+                0x0000031b       0x1f c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
  .debug_pubnames
-                0x000002d1       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
+                0x0000033a       0x1f c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .debug_pubnames
+                0x00000359       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
 
-.debug_info     0x00000000     0x12e7
+.debug_info     0x00000000     0x13f5
  *(.debug_info)
  .debug_info    0x00000000       0x76 a_comp.o
  .debug_info    0x00000076      0x125 adc.o
@@ -562,15 +587,16 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_info    0x0000026d      0x17b i2c.o
  .debug_info    0x000003e8      0x4b0 lcd_i2c.o
  .debug_info    0x00000898      0x1e9 leds.o
- .debug_info    0x00000a81      0x14b main.o
- .debug_info    0x00000bcc       0x76 ports.o
- .debug_info    0x00000c42      0x206 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
- .debug_info    0x00000e48      0x117 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
- .debug_info    0x00000f5f      0x2df c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
- .debug_info    0x0000123e       0xa9 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
+ .debug_info    0x00000a81       0xb0 main.o
+ .debug_info    0x00000b31       0x76 ports.o
+ .debug_info    0x00000ba7      0x1a9 usart.o
+ .debug_info    0x00000d50      0x206 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+ .debug_info    0x00000f56      0x117 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .debug_info    0x0000106d      0x2df c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .debug_info    0x0000134c       0xa9 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0xa12
+.debug_abbrev   0x00000000      0xab3
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x41 a_comp.o
  .debug_abbrev  0x00000041       0xc2 adc.o
@@ -578,29 +604,31 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_abbrev  0x00000188       0xef i2c.o
  .debug_abbrev  0x00000277      0x165 lcd_i2c.o
  .debug_abbrev  0x000003dc       0xcd leds.o
- .debug_abbrev  0x000004a9       0xe3 main.o
- .debug_abbrev  0x0000058c       0x41 ports.o
- .debug_abbrev  0x000005cd      0x157 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
- .debug_abbrev  0x00000724       0xc4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
- .debug_abbrev  0x000007e8      0x1c0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
- .debug_abbrev  0x000009a8       0x6a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
+ .debug_abbrev  0x000004a9       0x7d main.o
+ .debug_abbrev  0x00000526       0x41 ports.o
+ .debug_abbrev  0x00000567      0x107 usart.o
+ .debug_abbrev  0x0000066e      0x157 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+ .debug_abbrev  0x000007c5       0xc4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .debug_abbrev  0x00000889      0x1c0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .debug_abbrev  0x00000a49       0x6a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
 
-.debug_line     0x00000000     0x1005
+.debug_line     0x00000000     0x110c
  *(.debug_line)
- .debug_line    0x00000000       0x74 a_comp.o
- .debug_line    0x00000074      0x198 adc.o
- .debug_line    0x0000020c       0xe1 ext_int.o
- .debug_line    0x000002ed      0x1c9 i2c.o
- .debug_line    0x000004b6      0x3bf lcd_i2c.o
- .debug_line    0x00000875      0x1a2 leds.o
- .debug_line    0x00000a17      0x195 main.o
- .debug_line    0x00000bac       0x7b ports.o
- .debug_line    0x00000c27      0x133 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
- .debug_line    0x00000d5a       0xa5 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
- .debug_line    0x00000dff      0x18a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
- .debug_line    0x00000f89       0x7c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
+ .debug_line    0x00000000       0x7c a_comp.o
+ .debug_line    0x0000007c      0x198 adc.o
+ .debug_line    0x00000214       0xe1 ext_int.o
+ .debug_line    0x000002f5      0x1c9 i2c.o
+ .debug_line    0x000004be      0x3bf lcd_i2c.o
+ .debug_line    0x0000087d      0x1a2 leds.o
+ .debug_line    0x00000a1f       0xdd main.o
+ .debug_line    0x00000afc       0x8b ports.o
+ .debug_line    0x00000b87      0x1a7 usart.o
+ .debug_line    0x00000d2e      0x133 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+ .debug_line    0x00000e61       0xa5 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .debug_line    0x00000f06      0x18a c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .debug_line    0x00001090       0x7c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
 
-.debug_frame    0x00000000      0x290
+.debug_frame    0x00000000      0x2f0
  *(.debug_frame)
  .debug_frame   0x00000000       0x20 a_comp.o
  .debug_frame   0x00000020       0x50 adc.o
@@ -610,11 +638,12 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_frame   0x000001a0       0x40 leds.o
  .debug_frame   0x000001e0       0x30 main.o
  .debug_frame   0x00000210       0x20 ports.o
- .debug_frame   0x00000230       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
- .debug_frame   0x00000250       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
- .debug_frame   0x00000270       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .debug_frame   0x00000230       0x60 usart.o
+ .debug_frame   0x00000290       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+ .debug_frame   0x000002b0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .debug_frame   0x000002d0       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
 
-.debug_str      0x00000000      0x44c
+.debug_str      0x00000000      0x4bb
  *(.debug_str)
  .debug_str     0x00000000       0x92 a_comp.o
                                  0xc6 (size before relaxing)
@@ -629,39 +658,42 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_str     0x0000022d       0x32 leds.o
                                 0x121 (size before relaxing)
  .debug_str     0x0000025f       0x28 main.o
-                                0x11f (size before relaxing)
+                                 0xdc (size before relaxing)
  .debug_str     0x00000287       0x13 ports.o
                                  0xbf (size before relaxing)
- .debug_str     0x0000029a      0x115 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+ .debug_str     0x0000029a       0x6f usart.o
+                                0x125 (size before relaxing)
+ .debug_str     0x00000309      0x115 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
                                 0x177 (size before relaxing)
- .debug_str     0x000003af       0x5c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .debug_str     0x0000041e       0x5c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
                                 0x111 (size before relaxing)
- .debug_str     0x0000040b       0x41 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .debug_str     0x0000047a       0x41 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
                                 0x19d (size before relaxing)
  .debug_str     0x00000000       0xf4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
 
-.debug_loc      0x00000000      0x4ce
+.debug_loc      0x00000000      0x4dc
  *(.debug_loc)
  .debug_loc     0x00000000       0x13 adc.o
  .debug_loc     0x00000013       0x30 ext_int.o
  .debug_loc     0x00000043       0x13 i2c.o
  .debug_loc     0x00000056      0x20a lcd_i2c.o
- .debug_loc     0x00000260       0x50 main.o
- .debug_loc     0x000002b0       0x4c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
- .debug_loc     0x000002fc       0x94 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
- .debug_loc     0x00000390      0x13e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .debug_loc     0x00000260       0x5e usart.o
+ .debug_loc     0x000002be       0x4c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+ .debug_loc     0x0000030a       0x94 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .debug_loc     0x0000039e      0x13e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
 
 .debug_macinfo
  *(.debug_macinfo)
 OUTPUT(sdk_2027.elf elf32-avr)
 LOAD linker stubs
 
-.debug_ranges   0x00000000      0x1a0
+.debug_ranges   0x00000000      0x190
  .debug_ranges  0x00000000       0x18 a_comp.o
  .debug_ranges  0x00000018       0x30 adc.o
  .debug_ranges  0x00000048       0x28 ext_int.o
  .debug_ranges  0x00000070       0x38 i2c.o
  .debug_ranges  0x000000a8       0x50 lcd_i2c.o
  .debug_ranges  0x000000f8       0x28 leds.o
- .debug_ranges  0x00000120       0x68 main.o
- .debug_ranges  0x00000188       0x18 ports.o
+ .debug_ranges  0x00000120       0x20 main.o
+ .debug_ranges  0x00000140       0x18 ports.o
+ .debug_ranges  0x00000158       0x38 usart.o

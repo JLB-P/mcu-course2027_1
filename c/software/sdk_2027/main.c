@@ -13,6 +13,7 @@
 #include "leds.h"
 #include "ext_int.h"
 #include "a_comp.h"
+#include "adc.h"
 #include "lcd_i2c.h" 
 
 
@@ -27,21 +28,24 @@ ISR(ANALOG_COMP_vect){
 int main(void)
 {
     init_ports();
-	init_ext_int();
-	init_analog_comp();
+//	init_ext_int();
+//	init_analog_comp();
+//	init_adc_withINT();
 	lcd_i2c_init();
-	sei();
+	lcd_i2c_clr();
+	lcd_i2c_col_row(1,1);
+	lcd_i2c_write_string("reprobados..");
+	//sei();
 	while (1) 
     {
-		lcd_i2c_col_row(1,1);
-		lcd_i2c_write_string("reprobados..");
-		if (comp_event_flag) {
-			lcd_i2c_clr();
-			lcd_i2c_write_string("Vin < Vref");
-			_delay_ms(1000);	//stay visible text for 1 second
-            // Clear the flag for the next event
-            comp_event_flag = 0; 
-    	}
+		
+//		if (comp_event_flag) {
+//			lcd_i2c_clr();
+//			lcd_i2c_write_string("Vin < Vref");
+//			_delay_ms(1000);	//stay visible text for 1 second
+//          // Clear the flag for the next event
+//            comp_event_flag = 0; 
+//    	}
 	}
 }
 

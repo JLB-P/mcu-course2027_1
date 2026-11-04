@@ -8,6 +8,7 @@
 #include <avr/io.h>
 
 void init_analog_comp(void){
+	ACSR &= ~(1<<ACIE); 
 	ACSR |= ((1 << ACIS0)|(1 << ACIS1)); //activa comparador en pulso de subida
 	ACSR |= (1 << ACIE); //activa interupciones
 }

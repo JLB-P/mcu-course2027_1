@@ -13,7 +13,6 @@ void init_adc_withoutINT(void)
 {
 	ADMUX=(1<<REFS0);	//selects Vref 
 						//(AVCC with external capacitor at AREF pin)
-						
 	ADCSRA = (1<<ADEN);	//enable ADC
 	ADCSRA = (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0);	//Prescaler div factor =128
 												//fo=1,000,000/128 ~ 7Khz
