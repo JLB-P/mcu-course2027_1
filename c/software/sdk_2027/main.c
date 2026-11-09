@@ -14,7 +14,8 @@
 #include "ext_int.h"
 #include "a_comp.h"
 #include "adc.h"
-#include "lcd_i2c.h" 
+#include "lcd_i2c.h"
+#include "usart.h" 
 
 
 //declare a shared flag as volatile
@@ -31,14 +32,15 @@ int main(void)
 //	init_ext_int();
 //	init_analog_comp();
 //	init_adc_withINT();
-	lcd_i2c_init();
-	lcd_i2c_clr();
-	lcd_i2c_col_row(1,1);
-	lcd_i2c_write_string("reprobados..");
-	//sei();
+//	lcd_i2c_init();
+//	lcd_i2c_clr();
+//	lcd_i2c_col_row(1,1);
+//	lcd_i2c_write_string("reprobados..");
+	init_usart(207);
+	sei();
 	while (1) 
     {
-		
+	usart_transmit_string("Hello World!\n");
 //		if (comp_event_flag) {
 //			lcd_i2c_clr();
 //			lcd_i2c_write_string("Vin < Vref");
